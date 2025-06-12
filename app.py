@@ -2,7 +2,6 @@ from flask import Flask, render_template, jsonify, request
 
 from src.helper import download_hugging_face_embeddings
 from langchain_pinecone import PineconeVectorStore
-from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.prompts import PromptTemplate
 from langchain.llms import CTransformers
 from langchain.chains import RetrievalQA
@@ -25,17 +24,12 @@ text_chunks = text_split(documents)
 print("[INFO] Downloading HuggingFace embeddings...")
 embeddings = download_hugging_face_embeddings()  # Or use HuggingFaceEmbeddings()
 
-texts = [t.page_content for t in text_chunks]
+# texts = [t.page_content for t in text_chunks]
 
 # Create Pinecone Vector Store
 index_name = "medical"
 
-print(f"[INFO] Creating or using existing Pinecone index: {index_name}")
-docsearch = PineconeVectorStore.from_texts(
-    texts=texts,
-    embedding=embeddings,
-    index_name=index_name
-)
+docsearch = PineconeVectorStore.from_existing_index(index_name, embeddings)
 
 print("[SUCCESS] Pinecone Vector Store is ready.")
 
@@ -60,4 +54,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug= True)
+    app.run(debug= False)
