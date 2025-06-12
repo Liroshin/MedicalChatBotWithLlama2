@@ -1,0 +1,9 @@
+langchain==0.3.25
+langchain-community==0.3.24
+langchain-pinecone==0.2.6
+langchain-huggingface==0.2.0
+pinecone==6.0.0
+ctransformers==0.2.27
+sentence-transformers
+flask
+pypdf
