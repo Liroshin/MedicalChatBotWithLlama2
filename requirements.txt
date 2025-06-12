@@ -7,3 +7,4 @@ ctransformers==0.2.27
 sentence-transformers
 flask
 pypdf
+-e .
