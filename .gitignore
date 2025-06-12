@@ -194,3 +194,4 @@ cython_debug/
 .cursorindexingignore
 
 # model/llama-2-13b-chat.ggmlv3.q5_1.bin"model/llama-2-13b-chat.ggmlv3.q5_1.bin" 
+"model/*.bin" 
