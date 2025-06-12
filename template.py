@@ -2,7 +2,8 @@ import os
 from pathlib import Path
 import logging
 
-logging.basicConfig(Level=logging.INFO, format='[%(asctime)s]: %(message)s:')
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s')
+
 
 list_of_files=[
     "src/_init_.py",
@@ -18,5 +19,18 @@ list_of_files=[
 ]
 
 for filepath in list_of_files:
-    Path(filepath)
+    filepath = Path(filepath)
+    filedir, filename = os.path.split(filepath)
+
+    if filedir !="":
+        os.makedirs(filedir, exist_ok=True)
+        logging.info(f"Creating director: {filedir} for the file {filename}")
+
+    if (not os.path.exists(filepath)) or (os.path.getsize(filename) == 0):
+        with open(filepath, 'w') as f:
+            pass
+            logging.info(f"Creating empty file: {filepath}")
+    else:
+        logging.info(f"{filename} is already created")
+
 
